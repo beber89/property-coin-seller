@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RealEstate DAPP</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  </head>
+  <style>
+    input {
+      display: block;
+      margin-bottom: 12px;
+    }
+  </style>
+  <body>
+    <h1>RealEstate Token DAPP</h1>
+    <p>NB: please refresh webpage after switching wallet accounts</p>
+    <hr>
+
+    <br>
+      <h2>Add a Proof</h2>
+      <p>Proofs 1-10 has been used up, kindly pick other proofs</p>
+      <p>File selector expects files in folder proofs only</p>
+      <p>or otherwise, unexpected behavior</p>
+      <input type="file" id="proof-file" name="proofFile">
+      <!-- <br><label for="starName">Star Name:</label><input type="text" id="starName"></input>
+      <br><label for="starId">Star ID:</label><input type="text" id="starId"></input> -->
+      <br><br><button id="createStar" onclick="App.addSolution()">Add Solution</button>
+      <br>
+      <hr>
+      <br>
+      <h2>Mint a Token</h2>
+      <br>
+      <label for="proof">Key: paste solution key here</label>
+      <input type="text" id="proof-key-input"></input>
+      <br>
+      <button onclick="App.mint()">mint token</button>
+      <hr>
+      <br>
+      <span id="status"></span>
+      <br>
+    <script src="index.js"></script>
+  </body>
+</html>

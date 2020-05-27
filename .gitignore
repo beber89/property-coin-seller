@@ -1,0 +1,8 @@
+node_modules
+debugging-log.md
+*.secret
+TODO.md
+xxtestxx
+truffle-.xjs
+deployment-details*.txt
+script/*
