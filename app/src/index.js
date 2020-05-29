@@ -42,8 +42,12 @@ const App = {
       proof.proof.c, 
       proof.inputs).send({from: this.account});
       let events = await this.meta.getPastEvents( 'SolutionAdded', { fromBlock: 'latest', toBlock: 'latest' } );
-      let solutionKey = events[0].returnValues[2];
-    App.setStatus("Solution Key added is\n" + solutionKey + "\nCopy it in the minting section to mint this new token");
+      if(events[0] === null) {
+        App.setStatus("Event is not caught,\n Please find the key in etherscan emitted by SolutionAdded Event\nPaste it in input field before minting.")
+      } else {
+        let solutionKey = events[0].returnValues[2];
+        App.setStatus("Solution Key added is\n" + solutionKey + "\nCopy it in the minting section to mint this new token");
+      }
   },
 
   mint: async function() {
