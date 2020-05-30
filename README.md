@@ -19,18 +19,81 @@ Solution Key added is <HASH_OF_CHOSEN_PROOF> Copy it in the minting section to m
 ```
 Copy `<HASH_OF_CHOSEN_PROOF>` and paste it into the input field before minting the token. Note that the owner of the smart contract is the only account address allowed to mint tokens.
 
-# Contract
-Contract addresses: 
+# Test Before Infura Deployment
+Contract is required to be tested before deploying into the infura network
+
+First, navigate to `eth-contracts` to create a local blockchain network, 
+in the terminal, type
+```
+truffle develop
+```
+then test the compiled contracts artifacts by typing
+```
+truffle test
+```
+which shows all the tests running successfully without issues
+```
+truffle(develop)> truffle test
+Using network 'develop'.
+
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+  Contract: PropertySellerCoin
+    match erc721 spec
+      ✓ should return total supply (48ms)
+      ✓ should get token balance
+      ✓ should return token uri
+      ✓ should transfer token from one owner to another (113ms)
+    have ownership properties
+      ✓ should fail when minting when address is not contract owner (73ms)
+      ✓ should return contract owner (146ms)
+
+  Contract: SolnSquareVerifier
+    Initialize Soln Square Verifier Contract
+      ✓ Contract deployment (188ms)
+      ✓ Test if a new solution can be added (2186ms)
+      ✓ Ensuring that contract reverts when adding an existing proof (1735ms)
+key
+ 0x16621c518ef438ef6ce0dba157c2e287cc57d21eaeaf141596c65571471cb5d0
+      ✓ Test if an ERC721 token can be minted (208ms)
+      ✓ Test that solution can not be used again (62ms)
+      ✓ Ensuring that contract reverts when key for non-existing solution is used (57ms)
+
+  Contract: Verifier
+    Initialize Verifier Contract
+      ✓ Test verification with correct proof (875ms)
+      ✓ Test verification with incorrect proof (863ms)
+
+
+  14 passing (12s)
+```
+
+# Deploying Contracts
+In the terminal, in the `eth-contracts` local directory type
+```
+truffle migrate --network rinkeby
+```
+From which contracts are deployed from the infura node registered, then returns the addresses and the abis of the deployed contracts `SolnSquareVerifier` and `Verifier`
+
+### Contract addresses: 
 
 SolnSquareVerifier: `"0x19Fd90328831A37475601F50b1080226A3079916"`
 
 Verifier: `0x84C313734Cb55313620736b4AD3BD062475C4386`
 
-Contract abi:
+### Contract abis:
 
 ```
 /eth-contracts/build/contracts/SolnSquareVerifier.json
+/eth-contracts/build/contracts/Verifier.json
 ```
+
+`NB: It is preferred to delete the content of the eth-contracts/build directory before initiating this step`
 
 # OpenSea
 
