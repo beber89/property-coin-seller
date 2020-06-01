@@ -1,0 +1,43 @@
+@page "/minter"
+@inject HttpClient Http
+@using Services
+@inject Web3 web3
+
+<h1>Minter</h1>
+
+<input @bind="proofFile" type="file" placeholder="Add Solution"/>
+<button class="btn btn-primary" @onclick="SubmitProof">Submit Proof</button>
+
+@code {
+  protected override async Task OnInitializedAsync()  {
+
+  }
+  private string proofFile;
+    private async void SubmitProof()
+    {
+      string[] path = proofFile.Split("\\", 10);
+      ProofModel soln = await Http.GetFromJsonAsync<ProofModel>($"proofs/{path[2]}");
+        //TODO: load contract , add solution into contract
+    }
+    // ---- Ethereum code ---------------------------------------------
+        static async Task GetAccountBalance()
+        {
+            var balance = await web3.Eth.GetBalance.SendRequestAsync("0xD04FB1a81c9252b02e137AE3A75610172B7355Dd");
+            Console.WriteLine($"Balance in Wei: {balance.Value}");
+
+            var etherAmount = Web3.Convert.FromWei(balance.Value);
+            Console.WriteLine($"Balance in Ether: {etherAmount}");
+        }
+    // ----------------------------------------------------------------
+    public class ProofModel
+    {
+        public Proof proof { get; set; }
+
+        public List<string> inputs  { get; set; }
+    }
+    public class Proof {
+      public List<string> a { get; set; }
+      public List<List<string>> b { get; set; }
+      public List<string> c { get; set; }
+    }
+}

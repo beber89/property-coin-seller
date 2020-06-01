@@ -7,3 +7,5 @@ truffle-.xjs
 deployment-details
 deployment-details*.txt
 script/*
+blazor-app/*bin*
+blazor-app/obj

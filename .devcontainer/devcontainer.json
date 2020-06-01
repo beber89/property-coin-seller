@@ -1,0 +1,6 @@
+{
+  "name": "My Project",
+  "image": "mcr.microsoft.com/dotnet/core/sdk:latest",
+  "appPort": 8090,
+  "extensions": ["ms-vscode.csharp"]
+}
