@@ -22,7 +22,7 @@ namespace blazor_app
             builder.Services.AddTransient(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
             // ---- Ethereum code -----
-            builder.Services.AddSingleton<Web3>(sp => new Web3("https://rinkeby.infura.io/v3/aaa6614b170b4067b7b1cd2f616bda18"));
+            builder.Services.AddSingleton<Web3Service, Web3Service>();
             // ------------------------
             await builder.Build().RunAsync();
         }

@@ -1,7 +1,9 @@
 @page "/minter"
-@inject HttpClient Http
-@using Services
-@inject Web3 web3
+@using Nethereum.Web3;
+@using Newtonsoft.Json.Linq;
+
+@inject HttpClient Http;
+@inject Web3Service Web3s;
 
 <h1>Minter</h1>
 
@@ -10,7 +12,7 @@
 
 @code {
   protected override async Task OnInitializedAsync()  {
-
+    GetAccountBalance().Wait();
   }
   private string proofFile;
     private async void SubmitProof()
@@ -18,11 +20,16 @@
       string[] path = proofFile.Split("\\", 10);
       ProofModel soln = await Http.GetFromJsonAsync<ProofModel>($"proofs/{path[2]}");
         //TODO: load contract , add solution into contract
+      string rawArtifact = await Http.GetStringAsync("artifacts/SolnSquareVerifier.json");
+      dynamic abi = JObject.Parse(rawArtifact);
+      Console.WriteLine(abi.networks);
+
     }
     // ---- Ethereum code ---------------------------------------------
-        static async Task GetAccountBalance()
+        private async Task GetAccountBalance()
         {
-            var balance = await web3.Eth.GetBalance.SendRequestAsync("0xD04FB1a81c9252b02e137AE3A75610172B7355Dd");
+
+            var balance = await Web3s.getWeb3().Eth.GetBalance.SendRequestAsync("0xD04FB1a81c9252b02e137AE3A75610172B7355Dd");
             Console.WriteLine($"Balance in Wei: {balance.Value}");
 
             var etherAmount = Web3.Convert.FromWei(balance.Value);
