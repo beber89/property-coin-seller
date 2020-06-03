@@ -22,6 +22,12 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>
+    <script src="npm-libs/bundle.js"></script>
+    <script>
+      window.testFun = () => {
+        return Web3("https://rinkeby.infura.io/v3/aaa6614b170b4067b7b1cd2f616bda18");
+      }
+    </script>
 </body>
 
 </html>

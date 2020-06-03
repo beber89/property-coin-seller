@@ -1,9 +1,11 @@
 @page "/minter"
 @using Nethereum.Web3;
 @using Newtonsoft.Json.Linq;
+@using Microsoft.JSInterop;
 
 @inject HttpClient Http;
 @inject Web3Service Web3s;
+@inject IJSRuntime JSRuntime;
 
 <h1>Minter</h1>
 
@@ -12,7 +14,10 @@
 
 @code {
   protected override async Task OnInitializedAsync()  {
-    GetAccountBalance().Wait();
+    await JSRuntime.InvokeVoidAsync("App.onload");
+    @* await JSRuntime.InvokeAsync<dynamic>("getEthereum"); *@
+    @* Web3s.Callback(ethProvider); *@
+    @* await GetAccountBalance(); *@
   }
   private string proofFile;
     private async void SubmitProof()
@@ -28,7 +33,6 @@
     // ---- Ethereum code ---------------------------------------------
         private async Task GetAccountBalance()
         {
-
             var balance = await Web3s.getWeb3().Eth.GetBalance.SendRequestAsync("0xD04FB1a81c9252b02e137AE3A75610172B7355Dd");
             Console.WriteLine($"Balance in Wei: {balance.Value}");
 

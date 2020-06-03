@@ -19,6 +19,7 @@
     "ethers": "^4.0.47",
     "openzeppelin-solidity": "^2.2.0",
     "solc": "^0.5.2",
-    "solc-js": "^0.5.2"
+    "solc-js": "^0.5.2",
+    "web3": "1.0.0-beta.37"
   }
 }

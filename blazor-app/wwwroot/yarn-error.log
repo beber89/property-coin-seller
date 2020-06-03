@@ -1,0 +1,36 @@
+Arguments: 
+  /usr/local/Cellar/node@10/10.19.0/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js init
+
+PATH: 
+  /usr/local/opt/node@10/bin:/Users/mahmoudfathy/.cargo/bin:/usr/local/share/dotnet:/Users/mahmoudfathy/.rvm/gems/ruby-2.4.1/bin:/Users/mahmoudfathy/.rvm/gems/ruby-2.4.1@global/bin:/Users/mahmoudfathy/.rvm/rubies/ruby-2.4.1/bin:/Users/mahmoudfathy/.composer/vendor/bin:/usr/local/php5/bin:/usr/local/sbin:/usr/local/Cellar/python/3.7.4_1/bin:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/3.4/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/Library/TeX/texbin:/Library/java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/bin:/usr/local/lib/node_modules/ant/ant/bin:/Users/mahmoudfathy/Library/Android/sdk/platform-tools:/Users/mahmoudfathy/.rvm/bin:/Users/mahmoudfathy/Library/Android/sdk/emulator:/Users/mahmoudfathy/Library/Android/sdk/tools:/Users/mahmoudfathy/Library/Android/sdk/tools/bin:/Users/mahmoudfathy/Library/Android/sdk/platform-tools:/Users/mahmoudfathy/Drivers:/Users/mahmoudfathy/Developer/xptform/flutter/bin:/usr/local/go/bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  10.19.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:137008:13)
+      at Interface.emit (events.js:198:13)
+      at Interface._ttyWrite (readline.js:801:16)
+      at ReadStream.onkeypress (readline.js:184:10)
+      at ReadStream.emit (events.js:198:13)
+      at emitKeys (internal/readline.js:424:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1073:36)
+      at ReadStream.emit (events.js:198:13)
+      at addChunk (_stream_readable.js:288:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

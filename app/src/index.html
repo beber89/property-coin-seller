@@ -37,19 +37,6 @@
       <br>
       <span style="word-break: break-all; white-space: normal;" id="status"></span>
       <br>
-    <script>
-      window.getEthereum = async () => {
-        if (window.ethereum) {
-          // use MetaMask's provider
-          return window.ethereum
-          // await window.ethereum.enable(); // get permission to access accounts
-        } else {
-          console.warn("No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live",);
-          // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-          return new Web3.providers.HttpProvider("http://127.0.0.1:9545");
-        }
-      }
-    </script>
     <script src="index.js"></script>
   </body>
 </html>
