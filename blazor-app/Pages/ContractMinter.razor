@@ -11,6 +11,8 @@
 
 <input @bind="proofFile" type="file" placeholder="Add Solution"/>
 <button class="btn btn-primary" @onclick="SubmitProof">Submit Proof</button>
+<input @bind="proofKey" type="text" placeholder="Add Key"/>
+<button class="btn btn-primary" @onclick="Mint">Mint</button>
 
 @code {
   protected override async Task OnInitializedAsync()  {
@@ -20,26 +22,19 @@
     @* await GetAccountBalance(); *@
   }
   private string proofFile;
+  private string proofKey;
     private async void SubmitProof()
     {
       string[] path = proofFile.Split("\\", 10);
       ProofModel soln = await Http.GetFromJsonAsync<ProofModel>($"proofs/{path[2]}");
-        //TODO: load contract , add solution into contract
-      string rawArtifact = await Http.GetStringAsync("artifacts/SolnSquareVerifier.json");
-      dynamic abi = JObject.Parse(rawArtifact);
-      Console.WriteLine(abi.networks);
-
+      await JSRuntime.InvokeVoidAsync("App.addSolution", soln);
     }
-    // ---- Ethereum code ---------------------------------------------
-        private async Task GetAccountBalance()
-        {
-            var balance = await Web3s.getWeb3().Eth.GetBalance.SendRequestAsync("0xD04FB1a81c9252b02e137AE3A75610172B7355Dd");
-            Console.WriteLine($"Balance in Wei: {balance.Value}");
 
-            var etherAmount = Web3.Convert.FromWei(balance.Value);
-            Console.WriteLine($"Balance in Ether: {etherAmount}");
-        }
-    // ----------------------------------------------------------------
+    private async void Mint() {
+      proofKey = proofKey.Substring(0, 2) == "0x"? proofKey: ("0x"+proofKey);
+      await JSRuntime.InvokeVoidAsync("App.setProofKey", proofKey);
+      await JSRuntime.InvokeVoidAsync("App.mint");
+    }
     public class ProofModel
     {
         public Proof proof { get; set; }

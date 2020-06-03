@@ -76,8 +76,13 @@ const App = {
       }
   },
 
+  setProofKey: function(key) {
+    this.proofKey = key
+  },
+
   mint: async function() {
     const { mintVerifiedToken } = this.meta.methods;
+    console.log(this.proofKey);
     await mintVerifiedToken(this.proofKey).send({from: this.account});
     App.setStatus("New Token has been minted successfully");
   }
