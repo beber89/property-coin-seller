@@ -69,10 +69,9 @@ const App = {
       proof.inputs).send({from: this.account});
       let events = await this.meta.getPastEvents( 'SolutionAdded', { fromBlock: 'latest', toBlock: 'latest' } );
       if(events[0] === null) {
-        App.setStatus("Event is not caught,\n Please find the key in etherscan emitted by SolutionAdded Event\nPaste it in input field before minting.")
+        return "-1";
       } else {
-        let solutionKey = events[0].returnValues[2];
-        App.setStatus("Solution Key added is\n" + solutionKey + "\nCopy it in the minting section to mint this new token");
+        return (events[0].returnValues[2]);
       }
   },
 
@@ -84,7 +83,6 @@ const App = {
     const { mintVerifiedToken } = this.meta.methods;
     console.log(this.proofKey);
     await mintVerifiedToken(this.proofKey).send({from: this.account});
-    App.setStatus("New Token has been minted successfully");
   }
 
 };

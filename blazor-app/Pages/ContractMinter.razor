@@ -11,8 +11,13 @@
 
 <input @bind="proofFile" type="file" placeholder="Add Solution"/>
 <button class="btn btn-primary" @onclick="SubmitProof">Submit Proof</button>
+<br>
+<br>
 <input @bind="proofKey" type="text" placeholder="Add Key"/>
 <button class="btn btn-primary" @onclick="Mint">Mint</button>
+<br>
+<br>
+<span>@status</span>
 
 @code {
   protected override async Task OnInitializedAsync()  {
@@ -23,11 +28,21 @@
   }
   private string proofFile;
   private string proofKey;
+  private string status;
     private async void SubmitProof()
     {
+      this.status = "adding proof ... ";
+      this.StateHasChanged();
       string[] path = proofFile.Split("\\", 10);
       ProofModel soln = await Http.GetFromJsonAsync<ProofModel>($"proofs/{path[2]}");
-      await JSRuntime.InvokeVoidAsync("App.addSolution", soln);
+      string key = await JSRuntime.InvokeAsync<string>("App.addSolution", soln);
+        Console.WriteLine("key is "+key);
+      if (key == "-1") {
+        this.status = "Event is not caught,\n Please find the key in etherscan emitted by SolutionAdded Event\nPaste it in input field before minting";
+      } else {
+        this.status = "Solution added, hash key is " + key + " \nCopy it in the minting section to mint this new token";
+      }
+      this.StateHasChanged();
     }
 
     private async void Mint() {
